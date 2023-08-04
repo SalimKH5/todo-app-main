@@ -37,8 +37,30 @@ const App = () => {
     setTodos([])
   }
 
+  const [activeButton, setActiveButton] = useState(null);
+
+  const handleButtonClick = (buttonName) => {
+    setActiveButton(buttonName);
+  };
   
   
+  // Custom click handler for the 'All' button
+  const handleAllClick = () => {
+    All_items(); // Call the All_items function if needed
+    setActiveButton('All'); // Update the activeButton state to 'All'
+  };
+
+  // Custom click handler for the 'Active' button
+  const handleActiveClick = () => {
+    setActive(); // Call the setActive function if needed
+    setActiveButton('Active'); // Update the activeButton state to 'Active'
+  };
+
+  // Custom click handler for the 'Completed' button
+  const handleCompletedClick = () => {
+    setComplete(); // Call the setComplete function if needed
+    setActiveButton('Completed'); // Update the activeButton state to 'Completed'
+  };
 
   return (
     <>
@@ -79,9 +101,28 @@ const App = () => {
                         <p>{todos.length} items left</p>
                       </div>
                       <div className="option-center">
-                          <p onClick={All_items}>All</p>
-                          <p onClick={setActive}>Active</p>
-                          <p onClick={setComplete}>Completed</p>
+                      <p
+                    onClick={handleAllClick}
+                    style={{ color: activeButton === 'All' ? 'rgb(3, 3, 111)' : 'var(--DarkGrayishBlue)' }}
+                  >
+                    All
+                  </p>
+
+                  {/* 'Active' button */}
+                  <p
+                    onClick={handleActiveClick}
+                    style={{ color: activeButton === 'Active' ? 'rgb(3, 3, 111)' : 'var(--DarkGrayishBlue)' }}
+                  >
+                    Active
+                  </p>
+
+                  {/* 'Completed' button */}
+                  <p
+                    onClick={handleCompletedClick}
+                    style={{ color: activeButton === 'Completed' ? 'rgb(3, 3, 111)' : 'var(--DarkGrayishBlue)' }}
+                  >
+                    Completed
+                  </p>
                       </div>
                       <div className="option-right">
                         <p onClick={clear_complet}>Clear Completed</p>
